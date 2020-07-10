@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd ~
 # delete old nginx
 sudo apt remove -y nginx
 
