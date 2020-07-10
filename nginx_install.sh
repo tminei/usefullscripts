@@ -114,6 +114,7 @@ sudo systemctl start nginx.service
 # php 7.4 install
 sudo apt -y install software-properties-common && sudo add-apt-repository -y ppa:ondrej/php && sudo apt-get update
 sudo apt -y install php7.4 php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-mysql php7.4-mbstring php7.4-zip php7.4-fpm
+sudo mv /etc/php/7.4/fpm/php.ini /etc/php/7.4/fpm/php.ini.autobak
 sudo cat >> /etc/php/7.4/fpm/php.ini <<END
 cgi.fix_pathinfo=0
 END
