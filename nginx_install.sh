@@ -175,28 +175,26 @@ sudo touch /etc/nginx/sites-available/default
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.autobak
 sudo cat > /etc/nginx/sites-available/default <<END
 server {
-	listen 80;
-	root /var/www/html;
-	index index.php index.html;
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-	server_name _;
+    root /var/www/html;
+    index index.php index.html;
 
-    location /hls {
-        root /mnt/ramdisk;
-    }
-   
+    server_name server_domain_or_IP;
+
     location / {
-		try_files $uri $uri/ =404;
-	}
+        try_files $uri $uri/ =404;
+    }
 
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
-		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
-	}
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    }
 
-	location ~ /\.ht {
-		deny all;
-	}
+    location ~ /\.ht {
+        deny all;
+    }
 }
 END
 sudo mkdir /etc/nginx/sites-enabled/
